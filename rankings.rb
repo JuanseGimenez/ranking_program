@@ -7,7 +7,23 @@ class League
   end
 
   def add_match_results(match)
-  	# TODO
+  	if match[0][1] == match[1][1] 
+      team1 = @teams.find {|team| team.name == match[0][0]}
+      team2 = @teams.find {|team| team.name == match[1][0]}
+
+      team1.score += 1
+      team2.score += 1
+    else
+      winner = match.max_by { |x| x[1] }
+      losser = match.min_by { |x| x[1] }
+
+      team1 = @teams.find {|team| team.name == winner[0]}
+      team2 = @teams.find {|team| team.name == losser[0]}
+      
+      team1.score += 3 
+    end
+    team1.goals += match[0][1].to_i
+    team2.goals += match[1][1].to_i
   end
 
   def winner
