@@ -1,3 +1,13 @@
+class TestSuite
+  def expect(scenario, expectation)
+    if scenario != expectation
+      puts "Failed scenario: #{scenario} to be #{expectation}"
+    else
+      puts "Success scenario: #{scenario} to be #{expectation}"
+    end
+  end
+end
+
 class League
   attr_accessor :teams, :matches
 
