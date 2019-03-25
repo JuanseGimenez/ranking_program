@@ -1,3 +1,13 @@
+class Team
+  attr_accessor :name, :score, :goals
+
+  def initialize(name)
+  	@name  = name
+  	@score = 0
+  	@goals = 0
+  end
+end
+
 class FileParser
 	attr_accessor :filepath, :filecontent
 
@@ -6,7 +16,7 @@ class FileParser
     score: /\d+/,
     name_and_score: /(\w+\s?\w+)\s(\d)/
   }
-  
+
 	def initialize(name)
     @filepath = name
   end
