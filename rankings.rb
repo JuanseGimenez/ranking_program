@@ -27,7 +27,7 @@ class League
   end
 
   def winner
-  	# TODO
+  	scoreboard.first
   end
 
   def scoreboard
