@@ -1,3 +1,24 @@
+class League
+  attr_accessor :teams, :matches
+
+  def initialize(teams = [], matches = [])
+    @teams   = teams.map { |team| Team.new(team) } 
+    @matches = matches.map { |match| add_match_results(match)}
+  end
+
+  def add_match_results(match)
+  	# TODO
+  end
+
+  def winner
+  	# TODO
+  end
+
+  def scoreboard
+  	# TODO
+  end
+end
+
 class Team
   attr_accessor :name, :score, :goals
 
