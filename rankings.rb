@@ -100,3 +100,20 @@ end
 file   = FileParser.new('input.txt')
 league = League.new(file.teams, file.matches)
 file.export_board(league.scoreboard)
+
+test = TestSuite.new
+test.expect(league.winner[:name], "Lions")
+test.expect(league.scoreboard, [{:name=>"Lions", :score=>7, :goals=>9},
+																{:name=>"Tarantulas", :score=>7, :goals=>5},
+																{:name=>"FC Awesome", :score=>4, :goals=>4},
+																{:name=>"Snakes", :score=>3, :goals=>10},
+																{:name=>"Grouches", :score=>1, :goals=>3}])
+test.expect(file.teams, ["Lions", "Snakes", "Tarantulas", "FC Awesome", "Grouches"])
+test.expect(file.matches, [[["Lions", "4"], ["Snakes", "3"]],
+													 [["Tarantulas", "1"], ["FC Awesome", "0"]],
+													 [["Lions", "1"], ["FC Awesome", "1"]],
+													 [["Tarantulas", "3"], ["Snakes", "1"]],
+													 [["Lions", "4"], ["Grouches", "0"]],
+													 [["Tarantulas", "1"], ["Grouches", "1"]],
+													 [["Snakes", "4"], ["Grouches", "2"]],
+													 [["FC Awesome", "3"], ["Snakes", "2"]]])
