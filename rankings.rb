@@ -83,6 +83,12 @@ class FileParser
     end
   end
 
+  def show_board(board)
+    board.each_with_index do |team, index|
+      puts "#{index + 1}. #{team[:name]}, #{team[:score]} pts"
+    end
+  end
+
   def export_board(board)
     file = File.open("output.txt", "w")
     board.each_with_index do |team, index|
@@ -99,6 +105,7 @@ end
 
 file   = FileParser.new('input.txt')
 league = League.new(file.teams, file.matches)
+file.show_board(league.scoreboard)
 file.export_board(league.scoreboard)
 
 test = TestSuite.new
