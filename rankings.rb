@@ -86,3 +86,7 @@ class FileParser
     @filecontent ||= File.read(@filepath)
   end
 end
+
+file   = FileParser.new('input.txt')
+league = League.new(file.teams, file.matches)
+file.export_board(league.scoreboard)
