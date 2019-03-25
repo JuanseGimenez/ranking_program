@@ -19,7 +19,7 @@ class League
 
       team1 = @teams.find {|team| team.name == winner[0]}
       team2 = @teams.find {|team| team.name == losser[0]}
-      
+
       team1.score += 3 
     end
     team1.goals += match[0][1].to_i
@@ -70,6 +70,13 @@ class FileParser
   def matches
     parse_file.lines.each_with_object([]) do |line, matches|
       matches << line.scan(REGEXP[:name_and_score])
+    end
+  end
+
+  def export_board(board)
+    file = File.open("output.txt", "w")
+    board.each_with_index do |team, index|
+      file.puts "#{index + 1}. #{team[:name]}, #{team[:score]} pts"
     end
   end
 
