@@ -31,7 +31,9 @@ class League
   end
 
   def scoreboard
-  	# TODO
+  	teams.sort { |team1, team2| team1.score == team2.score ? team1.name <=> team2.name : team2.score <=> team1.score }.each_with_object([]) do |team, scoreboard|
+      scoreboard << { name: team.name, score: team.score, goals: team.goals }
+    end
   end
 end
 
