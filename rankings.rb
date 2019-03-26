@@ -16,6 +16,12 @@ class League
     @matches = matches.map { |match| add_match_results(match)}
   end
 
+  # Aggregate score to team it depends to result of match
+  # Find: used to find object by name => https://apidock.com/ruby/Enumerable/find
+  # Min_by: Used to returns the object in enum that gives the minimum value from the given block.
+  # https://apidock.com/ruby/Enumerable/min_by
+  # Max_by: Used to returns the object in enum that gives the maximum value from the given block.
+  # https://apidock.com/ruby/Enumerable/max_by
   def add_match_results(match)
   	if match[0][1] == match[1][1] 
       team1 = @teams.find {|team| team.name == match[0][0]}
@@ -36,10 +42,15 @@ class League
     team2.goals += match[1][1].to_i
   end
 
+  # Should return team winner (First position of scoreboard)
+  # First: return the first element of the enumerable
+  # https://apidock.com/ruby/Enumerable/first
   def winner
   	scoreboard.first
   end
 
+  # Should return scoreboard sorted by score and sorted by name if two teams have the same score
+	# Method Sort: used to sort result by score descending and by name ascending if score values are equals => https://apidock.com/ruby/Enumerable/sort
   def scoreboard
   	teams.sort { |team1, team2| team1.score == team2.score ? team1.name <=> team2.name : team2.score <=> team1.score }.each_with_object([]) do |team, scoreboard|
       scoreboard << { name: team.name, score: team.score, goals: team.goals }
@@ -70,6 +81,10 @@ class FileParser
     @filepath = name
   end
 
+  # Should return team list
+  # Strip: method to remove whitespace => https://apidock.com/ruby/String/strip
+  # Split: text line to return Array of String => https://apidock.com/ruby/String/split
+  # Scan: to match with Regular Expression and return splited team name and result => https://apidock.com/ruby/String/scan
   def teams
     parse_file.lines.each_with_object([]) do |line, matches|
       teams = line.strip.split(',')
@@ -77,18 +92,21 @@ class FileParser
     end.map{|v| v[0][0] }.uniq
   end
 
+  # Should return matches list
   def matches
     parse_file.lines.each_with_object([]) do |line, matches|
       matches << line.scan(REGEXP[:name_and_score])
     end
   end
 
+  # Should print scoreboard in console
   def show_board(board)
     board.each_with_index do |team, index|
       puts "#{index + 1}. #{team[:name]}, #{team[:score]} pts"
     end
   end
 
+  # Should Export scoreboard in output.txt file
   def export_board(board)
     file = File.open("output.txt", "w")
     board.each_with_index do |team, index|
@@ -97,7 +115,7 @@ class FileParser
   end
 
   private
-
+  # Should be return content of file
   def parse_file
     @filecontent ||= File.read(@filepath)
   end
