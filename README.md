@@ -1,6 +1,3 @@
-Thank you for your interest in Weblinc.
-===========================================
-
 This is a small problem that we would like you to solve so that we can get an idea of your coding ability.
 Your submission will be run in a clean environment to see if it produces the expected output.
 Please be sure to provide instructions for installing any dependancies.
@@ -60,7 +57,3 @@ Please document any steps necessary to run your solution and your tests.
 Platform support
 ----------------
 This will be run in a unix-ish environment (OS X).
-
-Questions?
-----------
-Please email mplatt@weblinc.com if you have any questions.
